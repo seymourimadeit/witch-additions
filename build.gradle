@@ -15,6 +15,11 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
+    maven {
+        name "tocraftMaven-craftedCore"
+        url "https://maven.tocraft.dev/public/"
+    }
+    maven { url "https://maven.shedaniel.me" }
 }
 
 base {
@@ -60,6 +65,8 @@ configurations {
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
+    implementation "dev.tocraft:walkers-neoforge:1.21-5.7"
+    implementation "dev.tocraft:craftedcore-neoforge:1.21-5.8"
 }
 
 tasks.withType(ProcessResources).configureEach {

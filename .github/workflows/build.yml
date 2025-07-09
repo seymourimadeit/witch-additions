@@ -34,13 +34,13 @@ jobs:
           github-token: ${{ secrets.GIT_TOKEN }}
           modrinth-id: jRRBLkzK
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          files-primary: build/libs/!(*-@(javadoc|sources)).jar
+          files-primary: build/libs/!(*source*|*dev*|*javadoc*|*slim*).jar
           version-type: release
           loaders: neoforge
           game-versions: 1.21.1
           java: 21
           name: ""
-          changelog-file: changelog-1.21.*
+          changelog-file: changelog.*
       - name: Nuke Changelog dot txt
         uses: DamianReeves/write-file-action@master
         with:
