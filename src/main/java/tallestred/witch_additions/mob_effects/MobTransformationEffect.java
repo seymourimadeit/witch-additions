@@ -10,13 +10,16 @@ import tocraft.walkers.api.PlayerShape;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.function.Function;
 
 public class MobTransformationEffect extends MobEffect {
     private final EntityType<Mob> convertType;
+    private final ModifyMob modifyMob;
 
-    public MobTransformationEffect(MobEffectCategory category, int color, EntityType<?> convertType) {
+    public MobTransformationEffect(MobEffectCategory category, int color, EntityType<?> convertType, ModifyMob modifyMob) {
         super(category, color);
         this.convertType = (EntityType<Mob>) convertType;
+        this.modifyMob = modifyMob;
     }
 
     @Override
@@ -27,6 +30,7 @@ public class MobTransformationEffect extends MobEffect {
         if (livingEntity instanceof ServerPlayer serverPlayer) {
             mob = convertType.create(livingEntity.level());
             PlayerShape.updateShapes(serverPlayer, mob);
+            this.modifyMob(mob);
         } else {
             if (livingEntity instanceof PathfinderMob pathfinderMob) {
                 String mobId = pathfinderMob.getEncodeId();
@@ -36,6 +40,7 @@ public class MobTransformationEffect extends MobEffect {
                 }
                 mob.copyAttachmentsFrom(pathfinderMob, false);
                 mob.setData(WADataAttachments.TRANSFORMED_FROM.get(), mobId);
+                this.modifyMob(mob);
             }
         }
     }
@@ -49,5 +54,13 @@ public class MobTransformationEffect extends MobEffect {
 
     public EntityType<Mob> getConvertType() {
         return convertType;
+    }
+
+    public void modifyMob(Mob mob) {
+        this.modifyMob.modifyMob(mob);
+    }
+
+    public interface ModifyMob {
+        void modifyMob(Mob mob);
     }
 }
