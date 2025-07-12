@@ -1,0 +1,14 @@
+{
+  "item.witch_additions.frog_potion.effect.empty": "Potion of Frog Transformation",
+  "item.witch_additions.frog_splash_potion.effect.empty": "Splash Potion of Frog Transformation",
+  "item.witch_additions.axo_potion.effect.empty": "Potion of Axolotl Transformation",
+  "item.witch_additions.axo_splash_potion.effect.empty": "Splash Potion of Axolotl Transformation",
+  "item.witch_additions.cat_potion.effect.empty": "Potion of Cat Transformation",
+  "item.witch_additions.cat_splash_potion.effect.empty": "Splash Potion of Cat Transformation",
+  "item.witch_additions.spi_potion.effect.empty": "Potion of Spider Transformation",
+  "item.witch_additions.spi_splash_potion.effect.empty": "Splash Potion of Spider Transformation",
+  "effect.witch_additions.frog_transformation_effect": "Frog Transformation Effect",
+  "effect.witch_additions.cat_transformation_effect": "Cat Transformation Effect",
+  "effect.witch_additions.axo_transformation_effect": "Axolotl Transformation Effect",
+  "effect.witch_additions.spi_transformation_effect": "Spider Transformation Effect"
+}

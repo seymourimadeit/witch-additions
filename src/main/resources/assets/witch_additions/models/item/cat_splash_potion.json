@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "witch_additions:item/cat_splash_potion"
+  }
+}

@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 public class WADataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, WitchAdditions.MODID);
-    public static final Supplier<AttachmentType<String>> FROG_TRANSFORMED_FROM = ATTACHMENT_TYPES.register(
-            "frog_transformed_from", () -> AttachmentType.builder(() -> "").serialize(Codec.STRING).build()
+    public static final Supplier<AttachmentType<String>> TRANSFORMED_FROM = ATTACHMENT_TYPES.register(
+            "transformed_from", () -> AttachmentType.builder(() -> "").serialize(Codec.STRING).build()
     );
 }
