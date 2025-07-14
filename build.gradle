@@ -20,6 +20,16 @@ repositories {
         url "https://maven.tocraft.dev/public/"
     }
     maven { url "https://maven.shedaniel.me" }
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
 }
 
 base {
@@ -67,6 +77,9 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation "dev.tocraft:walkers-neoforge:1.21-5.7"
     implementation "dev.tocraft:craftedcore-neoforge:1.21-5.8"
+    compileOnly("mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}")
+    // at runtime, use the full JEI jar for NeoForge
+    runtimeOnly("mezz.jei:jei-${mc_version}-neoforge:${jei_version}")
 }
 
 tasks.withType(ProcessResources).configureEach {

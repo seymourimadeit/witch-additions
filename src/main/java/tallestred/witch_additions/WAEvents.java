@@ -9,13 +9,31 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.brewing.PlayerBrewedPotionEvent;
+import net.neoforged.neoforge.event.brewing.PotionBrewEvent;
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.TradeWithVillagerEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import tallestred.witch_additions.mob_effects.MobTransformationEffect;
 import tocraft.walkers.api.PlayerShape;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
+
+import static tallestred.witch_additions.WitchAdditions.*;
 
 @EventBusSubscriber(modid = WitchAdditions.MODID)
 public class WAEvents {
@@ -67,8 +85,30 @@ public class WAEvents {
                         mob.copyAttachmentsFrom(pathfinderMob, false);
                     }
                 }
-            } else if (transFormOnEnd){
+            } else if (transFormOnEnd) {
                 transformationEffect.transformMob(entity);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void registerBrewingRecipes(RegisterBrewingRecipesEvent event) {
+        PotionBrewing.Builder builder = event.getBuilder();
+        for (Supplier<? extends ItemLike> potion : POTIONS) {
+            Item potionItem = potion.get().asItem();
+            for (Supplier<? extends ItemLike> splashPotion : SPLASH_POTIONS) {
+                Item splashPotionItem = splashPotion.get().asItem();
+                String[] potionToSplit = potionItem.toString().split(":");
+                String potionName = potionToSplit[1];
+                String[] splashPotionToSplit = splashPotionItem.toString().split(":");
+                String splashPotionName = splashPotionToSplit[1];
+                String firstThreePotion = potionName.substring(0, Math.min(potionName.length(), 3));
+                String firstThreeSlash = splashPotionName.substring(0, Math.min(splashPotionName.length(), 3));
+                builder.addContainer(potionItem);
+                builder.addContainer(splashPotionItem);
+                if (firstThreePotion.equalsIgnoreCase(firstThreeSlash)) { // This took so many fucking hours of my life and the only thing I had to change was the method used. LOL!
+                    builder.addRecipe(Ingredient.of(potionItem), Ingredient.of(Items.GUNPOWDER), new ItemStack(splashPotion.get()));
+                }
             }
         }
     }

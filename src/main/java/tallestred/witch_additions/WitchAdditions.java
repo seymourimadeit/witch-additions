@@ -4,9 +4,13 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -27,6 +31,8 @@ import java.util.function.Supplier;
 @Mod(WitchAdditions.MODID)
 public class WitchAdditions {
     public static final String MODID = "witch_additions";
+    public static final List<Supplier<? extends ItemLike>> POTIONS = new ArrayList<>();
+    public static final List<Supplier<? extends ItemLike>> SPLASH_POTIONS = new ArrayList<>();
     public static final List<Supplier<? extends ItemLike>> ITEM_STACKS = new ArrayList<>();
 
     public WitchAdditions(IEventBus modEventBus, ModContainer modContainer) {

@@ -19,18 +19,20 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.ThrowablePotionItem;
+import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.trading.Merchant;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import tallestred.witch_additions.mob_effects.MobTransformationEffect;
 
 import java.util.function.Predicate;
 
-import static tallestred.witch_additions.WitchAdditions.ITEM_STACKS;
+import static tallestred.witch_additions.WitchAdditions.*;
 
 
 @EventBusSubscriber
@@ -75,8 +77,10 @@ public class WAMobEffects {
         ));
         DeferredHolder<Item, Item> potion = ITEMS.register(mobName + "_potion", () -> new PotionItem(new Item.Properties().stacksTo(1).component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY.withEffectAdded(new MobEffectInstance(effect, duration)))));
         DeferredHolder<Item, Item> splashPotion = ITEMS.register(mobName + "_splash_potion", () -> new ThrowablePotionItem(new Item.Properties().stacksTo(1).component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY.withEffectAdded(new MobEffectInstance(effect, duration)))));
-        ITEM_STACKS.add(potion);
+        SPLASH_POTIONS.add(splashPotion);
+        POTIONS.add(potion);
         ITEM_STACKS.add(splashPotion);
+        ITEM_STACKS.add(potion);
         return effect;
     }
 
