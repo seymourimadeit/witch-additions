@@ -21,6 +21,8 @@ public class ItemDataGen extends ItemModelProvider {
         justItemName("cat_splash_potion");
         justItemName("spi_potion");
         justItemName("spi_splash_potion");
+        justItemName("forbidden_potion");
+        justItemName("forbidden_splash_potion");
     }
 
     public void justItemName(String itemName) {

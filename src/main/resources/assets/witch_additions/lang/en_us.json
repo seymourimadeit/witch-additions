@@ -6,9 +6,12 @@
   "item.witch_additions.cat_potion.effect.empty": "Potion of Cat Transformation",
   "item.witch_additions.cat_splash_potion.effect.empty": "Splash Potion of Cat Transformation",
   "item.witch_additions.spi_potion.effect.empty": "Potion of Spider Transformation",
-  "item.witch_additions.spi_splash_potion.effect.empty": "Splash Potion of Spider Transformation",
+  "item.witch_additions.spi_splash_potion.effect.empty": "Forbidden Splash Potion",
+  "item.witch_additions.forbidden_potion.effect.empty": "Forbidden Potion",
+  "item.witch_additions.forbidden_splash_potion.effect.empty": "Forbidden Splash Potion",
   "effect.witch_additions.frog_transformation_effect": "Frog Transformation Effect",
   "effect.witch_additions.cat_transformation_effect": "Cat Transformation Effect",
   "effect.witch_additions.axo_transformation_effect": "Axolotl Transformation Effect",
-  "effect.witch_additions.spi_transformation_effect": "Spider Transformation Effect"
+  "effect.witch_additions.spi_transformation_effect": "Spider Transformation Effect",
+  "effect.witch_additions.forbidden_transformation_effect": "Ravager Transformation Effect"
 }
