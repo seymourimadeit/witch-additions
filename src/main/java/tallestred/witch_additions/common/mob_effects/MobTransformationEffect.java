@@ -1,4 +1,4 @@
-package tallestred.witch_additions.mob_effects;
+package tallestred.witch_additions.common.mob_effects;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;

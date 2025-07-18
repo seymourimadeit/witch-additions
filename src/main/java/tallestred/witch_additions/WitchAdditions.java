@@ -1,20 +1,17 @@
 package tallestred.witch_additions;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import tallestred.witch_additions.client.renderer.WitchHatRenderer;
 import tallestred.witch_additions.config.Config;
 
 import net.neoforged.bus.api.IEventBus;
@@ -38,8 +35,8 @@ public class WitchAdditions {
     public WitchAdditions(IEventBus modEventBus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         ApiLevel.setApiLevel(ApiLevel.API_ONLY);
-        WAMobEffects.MOB_EFFECTS.register(modEventBus);
-        WAMobEffects.ITEMS.register(modEventBus);
+        WAMobEffectsAndItems.MOB_EFFECTS.register(modEventBus);
+        WAMobEffectsAndItems.ITEMS.register(modEventBus);
         WADataAttachments.ATTACHMENT_TYPES.register(modEventBus);
     }
 

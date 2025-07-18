@@ -9,26 +9,23 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.CatVariant;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.npc.AbstractVillager;
-import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.ThrowablePotionItem;
-import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.trading.Merchant;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import tallestred.witch_additions.mob_effects.MobTransformationEffect;
+import tallestred.witch_additions.common.items.WitchHatItem;
+import tallestred.witch_additions.common.mob_effects.MobTransformationEffect;
 
 import java.util.function.Predicate;
 
@@ -36,9 +33,10 @@ import static tallestred.witch_additions.WitchAdditions.*;
 
 
 @EventBusSubscriber
-public class WAMobEffects {
+public class WAMobEffectsAndItems {
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, WitchAdditions.MODID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, WitchAdditions.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.createItems(WitchAdditions.MODID);
+    public static final DeferredHolder<Item, Item> WITCH_HAT = addToTab(ITEMS.register("witch_hat", () -> new WitchHatItem(new Item.Properties().stacksTo(1))));
     public static final DeferredHolder<MobEffect, MobTransformationEffect> FROG_TRANSFORMATION_EFFECT = registerTransformation("frog", EntityType.FROG, 600, 11521536);
     public static final DeferredHolder<MobEffect, MobTransformationEffect> AXO_TRANSFORMATION_EFFECT = registerTransformation("axo", EntityType.AXOLOTL, 600, 61403, mob -> {
         if (mob instanceof Axolotl axo && axo.level().getRandom().nextFloat() < 0.90) {
@@ -82,6 +80,11 @@ public class WAMobEffects {
         ITEM_STACKS.add(splashPotion);
         ITEM_STACKS.add(potion);
         return effect;
+    }
+
+    public static <T extends ItemLike> DeferredHolder<T, T> addToTab(DeferredHolder<T, T> itemLike) {
+        ITEM_STACKS.add(itemLike);
+        return itemLike;
     }
 
     @SubscribeEvent
